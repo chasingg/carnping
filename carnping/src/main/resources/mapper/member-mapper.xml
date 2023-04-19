@@ -3,107 +3,79 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
+
 	<resultMap id="memberResultSet" type="Member">
-		<result column="user_id" property="userId"/>
-		<result column="user_pwd" property="userPwd"/>
-		<result column="user_name" property="userName"/>
-		<result column="email" property="email"/>
-		<result column="gender" property="gender"/>
-		<result column="age" property="age"/>
-		<result column="phone" property="phone"/>
-		<result column="address" property="address"/>
-		<result column="enroll_date" property="enrollDate"/>
-		<result column="modify_date" property="modifyDate"/>
-		<result column="status" property="status"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="MEM_ID" property="memId"/>
+		<result column="MEM_PWD" property="memPwd"/>
+		<result column="MEM_NAME" property="memName"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="EMAIL" property="email"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="STATUS" property="status"/>
+		<result column="MEM_IMG" property="memImg"/>
+		<result column="PHONE" property="phone"/>
+		<result column="MEM_API_TYPE" property="memAplType"/>
+		<result column="MEM_API_TOKEN" property="memApiToken"/>
 	</resultMap>
 
-	<select id="loginMember" resultMap="memberResultSet">
-		
-	select
-	        user_id
-	        , user_pwd
-	        , user_name
-	        , email
-	        , gender
-	        , age
-	        , phone
-	        , address
-	        , enroll_date
-	        , modify_date
-	        , status
-	  from member
-	  where user_id = #{userId}
-	    and status = 'Y'
-		<!-- select
-	        user_id
-	        , user_pwd
-	        , user_name
-	        , email
-	        , gender
-	        , age
-	        , phone
-	        , address
-	        , enroll_date
-	        , modify_date
-	        , status
-	  from member
-	  where user_id = #{userId}
-	    and user_pwd = #{userPwd}
-	    and status = 'Y' -->
-	</select>
+	<resultMap id="memberReportResultSet" type="MemberReport">
+		<result column="REPORT_NO" property="reportNo"/>
+		<result column="REPORTED_MEM_NO" property="reportedMemNo"/>
+		<result column="REPORER_MEM_NO" property="reportMemNo"/>
+		<result column="REPORT_COUNT" property="reportCount"/>
+		<result column="SUSPEND_COUNT" property="suspendCount"/>
+	</resultMap>
+
+	<resultMap id="questionResultSet" type="Question">
+		<result column="QUE_NO" property="queNo"/>
+		<result column="QUE_CATEGORY" property="queCategory"/>
+		<result column="QUE_TITLE" property="queTitle"/>
+		<result column="QUE_CONTENT" property="queContent"/>
+		<result column="QUE_DATE" property="queDate"/>
+		<result column="QUE_STATUS" property="queStatus"/>
+		<result column="QUE_ANSWER" property="queAnswer"/>
+		<result column="MEM_NO" property="memNo"/>
+	</resultMap>
 	
-	<insert id="insertMember">
-		insert 
-		  into member
-			  (
-			  	  user_id
-		        , user_pwd
-		        , user_name
-		        , email
-		        , gender
-		        , age
-		        , phone
-		        , address
-			  )
-		values
-			  (
-			      #{userId}
-		      	, #{userPwd}
-		        , #{userName}
-		        , #{email}
-		        , #{gender}
-		        , #{age}
-		        , #{phone}
-		        , #{address}
-			  )
-			  	
+	<resultMap id="reportResultSet" type="Report">
+		<result column="REPORT_NO" property="reportNo"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="REPORT_REFNO" property="reportRefNo"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+		<result column="REPORT_DETAIL" property="reportDetail"/>
+	</resultMap>
 	
-	</insert>
-	<update id="updateMember">
-		UPDATE  
-				MEMBER
-		   SET
-				user_name = #{userName},
-		        email = #{email},
-		        gender = #{gender},
-		        age = #{age},
-		        phone = #{phone},
-		        address = #{address},
-		        modify_date = SYSDATE
-		 WHERE  user_id = #{userId}
-	</update>
+	<resultMap id="chatResultSet" type="Chat">
+		<result column="CHAT_NO" property="chatNo"/>
+		<result column="CHAT_COMMENT" property="chatComment"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="CHAT_CREATE_DATE" property="chatCreateDate"/>
+	</resultMap>
 	
-	<update id="deleteMember">
-		UPDATE
-				MEMBER
-		   SET 
-		   		STATUS = 'N'
-		 WHERE  USER_ID = #{userId}
-	</update>
-	<select id="idCheck" resultType="_int">
-		SELECT
-				COUNT(*)
-	      FROM  MEMBER
-	     WHERE  USER_ID = #{checkId}
- 	</select>
+	<resultMap id="chatResultSet" type="Chat">
+		<result column="MEM_NO" property="memNo"/>
+		<result column="CINFO_NO" property="cinfoNo"/>
+		<result column="LIKE_STATUS" property="likeStatus"/>
+	</resultMap>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

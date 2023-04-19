@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
 	
+	@Autowired 
+	private AdminServiceImpl mService; 
+	
 	/**
 	 * 관리자 페이지 이동
 	 */
@@ -21,6 +24,7 @@ public class AdminController {
 	 */
 	@RequestMapping("member.ad")
 	public String memNotice() {
+		ArrayList<Member> list = 
 		return "admin/member";
 	}
 	

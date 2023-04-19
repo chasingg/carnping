@@ -7,11 +7,23 @@
 	<settings>
 		<setting name = "jdbcTypeForNull" value="NULL"/>
 	</settings>
-<!-- 	
+	
 	<typeAliases>
-		<typeAlias type="com.kh.carnping.member.model.vo.Member" alias=""/>
-		<typeAlias type="com.kh.carnping.board.model.vo.Board" alias=""/>
-	</typeAliases> -->
+		<typeAlias type="com.kh.carnping.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.carnping.member.model.vo.Like" alias="Like"/>
+		<typeAlias type="com.kh.carnping.member.model.vo.Chat" alias="Chat"/>
+		<typeAlias type="com.kh.carnping.member.model.vo.MemberReport" alias="MemberReport"/>
+		<typeAlias type="com.kh.carnping.member.model.vo.Question" alias="Question"/>
+		<typeAlias type="com.kh.carnping.member.model.vo.Report" alias="Report"/>
+		<typeAlias type="com.kh.carnping.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.carnping.board.model.vo.BoardImg" alias="BoardImg"/>
+		<typeAlias type="com.kh.carnping.board.model.vo.Comment" alias="Comment"/>
+		<typeAlias type="com.kh.carnping.car.model.vo.Cinfo" alias="Cinfo"/>
+		<typeAlias type="com.kh.carnping.car.model.vo.CinfoImg" alias="CinfoImg"/>
+		<typeAlias type="com.kh.carnping.car.model.vo.Review" alias="Review"/>
+		<typeAlias type="com.kh.carnping.car.model.vo.Verify" alias="Verify"/>
+		<typeAlias type="com.kh.carnping.car.model.vo.VerifyImg" alias="VerifyImg"/>
+	</typeAliases>
 	<!-- 유의사항 : 미리 등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	
 	<!-- 
@@ -19,11 +31,12 @@
 		왜? db등록은 서버연동과 동시에 같이 이뤄져야 되기 때문에
 		서버 스타트와 동시에 바로 읽혀지는 root-context.xml 문서에 기술할 예정
 	 -->
-<!-- 	 
+	 
 	 <mappers>
 	 	<mapper resource="/mapper/member-mapper.xml" />
 	 	<mapper resource="/mapper/board-mapper.xml" />
-	 </mappers> -->
+	 	<mapper resource="/mapper/car-mapper.xml" />
+	 </mappers>
 	<!-- 유의사항 : 미리 등록해두려면 해당 mapper 파일이 진짜 존재하고 있는 상태여야함! 
 					뿐만아니라 namespace를 등록까지 지정되어 있어야함-->
 	

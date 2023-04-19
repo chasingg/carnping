@@ -1,140 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
-	
+
 	<resultMap type="Board" id="boardResultMap">
 		<result column="BOARD_NO" property="boardNo"/>
 		<result column="BOARD_TITLE" property="boardTitle"/>
-		<result column="BOARD_WRITER" property="boardWriter"/>
-		<result column="BOARD_CONTENT" property="boardContent"/>
-		<result column="ORIGIN_NAME" property="originName"/>
-		<result column="CHANGE_NAME" property="changeName"/>
-		<result column="COUNT" property="count"/>
+		<result column="MEM_NO" property="memNo"/>
 		<result column="CREATE_DATE" property="createDate"/>
+		<result column="LOCATION" property="location"/>
+		<result column="BOARD_CONTENT" property="boardContent"/>
+		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
 	</resultMap>
-	
-	<resultMap type="Reply" id="replyResultMap">
-		<result column="REPLY_NO" property="replyNo"/>
-		<result column="REPLY_CONTENT" property="replyContent"/>
-		<result column="REF_BNO" property="refBno"/>
-		<result column="REPLY_WRITER" property="replyWriter"/>
+
+	<resultMap type="BoardImg" id="boardImgResultMap">
+		<result column="BOARD_NO" property="boardNo"/>
+		<result column="BOARD_IMG1" property="boardImg1"/>
+		<result column="BOARD_IMG2" property="boardImg2"/>
+		<result column="BOARD_IMG3" property="boardImg3"/>
+		<result column="BOARD_IMG4" property="boardImg4"/>
+		<result column="BOARD_IMG5" property="boardImg5"/>
+	</resultMap>
+
+	<resultMap type="Comment" id="commentResultMap">
+		<result column="RE_NO" property="reNo"/>
+		<result column="REF_NO" property="refNo"/>
+		<result column="MEM_NO" property="memNo"/>
 		<result column="CREATE_DATE" property="createDate"/>
-		<result column="STATUS" property="Status"/>
+		<result column="COMM_CONTENT" property="commContent"/>
 	</resultMap>
 	
-	
-
-
-
-
-
-	<select id="selectListCount" resultType="_int">
-		SELECT 
-				COUNT(*)
-		  FROM  BOARD
-		 WHERE  STATUS = 'Y'
-	</select>
-	
-	<select id="selectList" resultMap="boardResultMap">
-		SELECT 
-		        BOARD_NO
-		      , BOARD_TITLE
-		      , BOARD_WRITER
-		      , COUNT
-		      , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE"
-		      , ORIGIN_NAME
-		  FROM  BOARD
-		 WHERE  STATUS ='Y'
-		 ORDER
-		    BY  BOARD_NO DESC
-	</select>
-	
-	<insert id="insertBoard">
-		INSERT 
-		  INTO BOARD
-		  		(
-		  		  BOARD_NO
-		  		, BOARD_TITLE
-		  		, BOARD_WRITER
-		  		, BOARD_CONTENT
-		  		, ORIGIN_NAME
-		  		, CHANGE_NAME
-		  		)
-		VALUES	(
-				  SEQ_BNO.NEXTVAL
-				, #{boardTitle}			
-				, #{boardWriter}			
-				, #{boardContent}			
-				, #{originName}			
-				, #{changeName}			
-				)
-	</insert>
-	
-	<update id="increaseCount">
-		UPDATE BOARD 
-		   SET COUNT = COUNT + 1
-		 WHERE BOARD_NO = #{boardNo}
-		  
-	</update>
-	
-	<select id="selectBoard" resultMap="boardResultMap">
-		SELECT 
-				  BOARD_NO
-				, BOARD_TITLE
-				, BOARD_WRITER
-				, BOARD_CONTENT
-			 	, ORIGIN_NAME
-				, CHANGE_NAME
-				, CREATE_DATE
-		  FROM  BOARD
-		 WHERE  BOARD_NO = #{boardNo}
-	</select>
-	
-	<update id="deleteBoard">
-		UPDATE  
-				BOARD
-		   SET  STATUS = 'N'
-		 WHERE  BOARD_NO = #{boardNo}
-	</update>
-	
-	<update id="updateBoard">
-		UPDATE
-				BOARD
-		   SET  BOARD_TITLE = #{boardTitle}
-		   	  , BOARD_CONTENT = #{boardContent}
-		   	  , ORIGIN_NAME = #{originName}
-		   	  , CHANGE_NAME = #{changeName}
-		 WHERE BOARD_NO =#{boardNo}
-	</update>
-	
-	<select id="selectReplyList" resultMap="replyResultMap">
-		SELECT 
-				  REPLY_NO
-				, REPLY_CONTENT
-				, REPLY_WRITER
-				, TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE"
-		  FROM  REPLY
-		 WHERE  REF_BNO = #{boardNo} 
-		   AND  STATUS = 'Y'
-		 ORDER
-		 	BY  REPLY_NO DESC
-	</select>
-	
-	<insert id="insertReply">
-		INSERT 
-			  INTO REPLY
-			  		(
-			  		 REPLY_NO
-					,REPLY_CONTENT
-					,REF_BNO
-					,REPLY_WRITER
-			  		)
-			VALUES	(
-					  SEQ_RNO.NEXTVAL
-					, #{replyContent}			
-					, #{refBno}			
-					, #{replyWriter}				
-					)
-	</insert>
 </mapper>

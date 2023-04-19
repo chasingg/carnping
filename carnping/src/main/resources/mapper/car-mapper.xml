@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="carMapper">
+
+	<resultMap type="Cinfo" id="cinfoResultMap">
+		<result column="CINFO_NO" property="cinfoNo"/>	
+		<result column="CINFO_NAME" property="cinfoName"/>	
+		<result column="CINFO_CONTENT" property="cinfoContent"/>	
+		<result column="CINFO_NOTICE" property="cinfoNotice"/>	
+		<result column="CINFO_LTTD" property="cinfoLttd"/>	
+		<result column="CINFO_HRDNS" property="cinfoHrdns"/>	
+		<result column="CINFO_STATUS" property="cinfoStatus"/>	
+		<result column="CINFO_ADDRESS" property="cinfoAddress"/>	
+		<result column="CINFO_FACILITIES" property="cinfoFacilities"/>	
+		<result column="CINFO_DAYS" property="cinfoDays"/>	
+		<result column="CINFO_TAG" property="cinfoTag"/>	
+		<result column="CINFO_RATING" property="cinfoRating"/>	
+		<result column="CINFO_VIEWS" property="cinfoViews"/>	
+		<result column="CINFO_MODIFIED" property="cinfoModified"/>	
+		<result column="CINFO_RGSTR_DATE" property="cinfoRgstrDate"/>	
+		<result column="MEM_NO" property="memNo"/>	
+	</resultMap>
+	
+	<resultMap type="CinfoImg" id="cinfoImgResultMap">
+		<result column="CINFO_NO" property="cinfoNo"/>	
+		<result column="CINFO_IMG1" property="cinfoImg1"/>	
+		<result column="CINFO_IMG2" property="cinfoImg2"/>	
+		<result column="CINFO_IMG3" property="cinfoImg3"/>	
+		<result column="CINFO_IMG4" property="cinfoImg4"/>	
+		<result column="CINFO_IMG5" property="cinfoImg5"/>	
+		<result column="CINFO_IMG6" property="cinfoImg6"/>	
+		<result column="CINFO_IMG7" property="cinfoImg7"/>	
+		<result column="CINFO_IMG8" property="cinfoImg8"/>	
+		<result column="CINFO_IMG9" property="cinfoImg9"/>	
+		<result column="CINFO_IMG10" property="cinfoImg10"/>	
+	</resultMap>
+	
+	<resultMap type="Review" id="reviewResultMap">
+		<result column="REVIEW_NO" property="reviewNo"/>	
+		<result column="CINFO_NO" property="cinfoNo"/>	
+		<result column="REVIEW_VIEW" property="reviewView"/>	
+		<result column="REVIEW_CONV" property="reviewConv"/>	
+		<result column="REVIEW_ACCESS" property="reviewAccess"/>	
+		<result column="REVIEW_TYPE" property="reviewType"/>	
+		<result column="REVIEW_CONTENT" property="reviewContent"/>	
+		<result column="REVIEW_IMG" property="reviewImg"/>	
+		<result column="REVIEW_LIKE" property="reviewLike"/>	
+		<result column="MEM_NO" property="memNo"/>	
+		<result column="CREATE_DATE" property="createDate"/>	
+	</resultMap>
+	
+	<resultMap type="Verify" id="verifyResultMap">
+		<result column="VERIFY_NO" property="verifyNo"/>	
+		<result column="VERIFY_NAME" property="verifyName"/>	
+		<result column="VERIFY_CONTENT" property="verifyText"/>	
+		<result column="VERIFY_NOTICE" property="verifyContent"/>	
+		<result column="VERIFY_LTTD" property="verifyNotice"/>	
+		<result column="VERIFY_HRDNS" property="verifyLttd"/>	
+		<result column="VERIFY_STATUS" property="verifyHrdns"/>	
+		<result column="VERIFY_ADDRESS" property="verifyStatus"/>	
+		<result column="VERIFY_FACILITIES" property="verifyAddress"/>	
+		<result column="VERIFY_DAYS" property="verifyFacilities"/>	
+		<result column="VERIFY_TAG" property="verifyDays"/>	
+		<result column="VERIFY_MODIFIED" property="verifyTag"/>	
+		<result column="VERIFY_RGSTR_DATE" property="verifyDate"/>	
+		<result column="VERIFY_REASON" property="verifyReason"/>	
+		<result column="MEM_NO" property="memNo"/>	
+	</resultMap>
+	
+	<resultMap type="VerifyImg" id="verifyImgResultMap">
+		<result column="VERIFY_NO" property="verifyNo"/>	
+		<result column="VERIFY_IMG1" property="verifyImg1"/>	
+		<result column="VERIFY_IMG2" property="verifyImg2"/>	
+		<result column="VERIFY_IMG3" property="verifyImg3"/>	
+		<result column="VERIFY_IMG4" property="verifyImg4"/>	
+		<result column="VERIFY_IMG5" property="verifyImg5"/>	
+		<result column="VERIFY_IMG6" property="verifyImg6"/>	
+		<result column="VERIFY_IMG7" property="verifyImg7"/>	
+		<result column="VERIFY_IMG8" property="verifyImg8"/>	
+		<result column="VERIFY_IMG9" property="verifyImg9"/>	
+		<result column="VERIFY_IMG10" property="verifyImg10"/>	
+	</resultMap>	
+
+
+
+</mapper>
