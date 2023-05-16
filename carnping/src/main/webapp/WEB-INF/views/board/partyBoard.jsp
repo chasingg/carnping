@@ -6,27 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style>
-    .header_back {
-        width: 100%;
-        height: 105px;
-        background-color: white;
-    }
-</style>
-
 </head>
 <body class="ov-hid">
-
-    <header class="header header--normal">
-
-
-	    <div class="header_back">
-	        <jsp:include page="../common/header.jsp" />
-	    </div>
-
-
-	</header>
+    <jsp:include page="../common/header.jsp"/>
 
     <!-- Filter Begin -->
     <div class="filter nice-scroll">
@@ -63,16 +45,15 @@
                 <h5>소모임 게시판</h5>
                 
             </div>
-            <div class="listing__text__top__right" onclick="location.href='lastest.bo'" style="cursor: pointer">최신순<i class="fa fa-sort-amount-asc"></i></div> <br><br>
-            
-			<button onclick = "partyBoardInsert();" style="float: right; background-color: rgb(104, 135, 115); color: white; border-color: rgb(104, 135, 115);">모임등록</button>
+            <div class="listing__text__top__right">최신순<i class="fa fa-sort-amount-asc"></i></div> <br><br>
+            <button style="float: right; background-color: rgb(104, 135, 115); color: white; border-color: rgb(104, 135, 115);">
+            <a href="partyBoardInsert.bo">모임등록</button></a>
 
 
         </div>
         <div class="listing__list" style="align-content: center;">
-        	<c:forEach var="b" items="${ list }">
             <div class="listing__item">
-                <div class="listing__item__pic set-bg" data-setbg="지도자리"> <!-- 지도 넣어보자 -->
+                <div class="listing__item__pic set-bg" data-setbg="img/listing/list-1.jpg"> <!-- 나눔상품이미지 -->
                     
                     <div class="listing__item__pic__btns">
                         <a href="#"><span class="icon_heart_alt"></span></a> <!-- 찜하기 버튼 -->
@@ -80,39 +61,91 @@
                 </div>
                 <div class="listing__item__text">
                     <div class="listing__item__text__inside">
-                        <h5 onclick="location.href='partyBoardDetail.bo'" style="cursor: pointer">
-                        	<input type="hidden" class="bno" value="${ b.boardNo }">
-                            ${ b.boardTitle }</h5>
+                        <h5><a href="partyBoardDetail.bo">가평 번개 파티 구함</h5></a>
                         <div class="listing__item__text__rating">
                            
-                            <h6>${ b.memId }</h6>
+                            <h6>user01</h6>
                         </div>
                         <ul>
+                            <li><span class="icon_pin_alt"></span>서울</li>
+                            <li><span class="icon_phone"></span> 010 - 1111 - 2222</li>
                         </ul>
                     </div>
                     
                 </div>
             </div>
-            </c:forEach>
+            <div class="listing__item">
+                <div class="listing__item__pic set-bg" data-setbg="img/listing/list-1.jpg"> <!-- 나눔상품이미지 -->
+                    
+                    <div class="listing__item__pic__btns">
+                        <a href="#"><span class="icon_heart_alt"></span></a> <!-- 찜하기 버튼 -->
+                    </div>
+                </div>
+                <div class="listing__item__text">
+                    <div class="listing__item__text__inside">
+                        <h5>가평 번개 파티 구함</h5>
+                        <div class="listing__item__text__rating">
+                           
+                            <h6>user01</h6>
+                        </div>
+                        <ul>
+                            <li><span class="icon_pin_alt"></span>서울</li>
+                            <li><span class="icon_phone"></span> 010 - 1111 - 2222</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="listing__item">
+                <div class="listing__item__pic set-bg" data-setbg="img/listing/list-1.jpg"> <!-- 나눔상품이미지 -->
+                    
+                    <div class="listing__item__pic__btns">
+                        <a href="#"><span class="icon_heart_alt"></span></a> <!-- 찜하기 버튼 -->
+                    </div>
+                </div>
+                <div class="listing__item__text">
+                    <div class="listing__item__text__inside">
+                        <h5>가평 번개 파티 구함</h5>
+                        <div class="listing__item__text__rating">
+                           
+                            <h6>user01</h6>
+                        </div>
+                        <ul>
+                            <li><span class="icon_pin_alt"></span>서울</li>
+                            <li><span class="icon_phone"></span> 010 - 1111 - 2222</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="listing__item">
+                <div class="listing__item__pic set-bg" data-setbg="img/listing/list-1.jpg"> <!-- 나눔상품이미지 -->
+                    
+                    <div class="listing__item__pic__btns">
+                        <a href="#"><span class="icon_heart_alt"></span></a> <!-- 찜하기 버튼 -->
+                    </div>
+                </div>
+                <div class="listing__item__text">
+                    <div class="listing__item__text__inside">
+                        <h5>가평 번개 파티 구함</h5>
+                        <div class="listing__item__text__rating">
+                           
+                            <h6>user01</h6>
+                        </div>
+                        <ul>
+                            <li><span class="icon_pin_alt"></span>서울</li>
+                            <li><span class="icon_phone"></span> 010 - 1111 - 2222</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
             
             
         </div>
         <jsp:include page="../common/footer.jsp"/>
     </section>
    
-   <script>
-  	 	$(function(){
-  	 		$(".listing__item__text__inside>h5").click(function(){
-  	 			location.href='partyBoardDetail.bo?bno=' + $(this).children(".bno").val();
-  	 			
-  	 		})
-  	 		
-  	 	})
-  	 	
-  	 	function partyBoardInsert(){
-  	 		location.href = 'enrollPartyBoardForm.bo';
-  	 	}
-    </script>
 
     
 </body>

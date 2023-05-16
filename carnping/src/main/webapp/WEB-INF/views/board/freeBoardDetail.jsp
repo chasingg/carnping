@@ -7,29 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	
-<style>
-    .header_back {
-        width: 100%;
-        height: 105px;
-        background-color: white;
-    }
-    
-    .ul_line {
-   		list-style-type: none;
-	}
-</style>
 </head>
-<body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
-	
-	<header class="header header--normal">
+<body>
 
-
-	    <div class="header_back">
-	        <jsp:include page="../common/header.jsp" />
-	    </div>
-
-
-	</header>
+	<jsp:include page="../common/header.jsp"/>
 	
 	
     
@@ -75,7 +56,7 @@
                                     </tr>
                                     <tr>
                                         <th>작성자</th>
-                                        <td>${ b.memNo }</td>
+                                        <td>${ b.memId }</td>
                                         <th>작성일</th>
                                         <td>${ b.createDate }</td>
                                     </tr>
@@ -93,8 +74,7 @@
                                  
                                 </table>
                                 <br>
-                    	
-                    			<c:if test="${ not empty loginMember.memId and loginMember.memId eq b.memNo }">
+                    
                                 <div align="center">
                                     <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
                                     <button type="button" class="btn btn-success" style="background-color: rgb(104, 135, 115); color: white; border-color: rgb(104, 135, 115);" onclick="postFormSubmit(1)">수정하기</button> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
@@ -106,7 +86,6 @@
 									<input type="hidden" name="filePath" value="${ b.boardChangeImg1 }">
 				            	</form>
                                 
-                                </c:if>
                         
                     
                                 
@@ -114,20 +93,100 @@
                             <br><br>
                         </div>
                         
-                        <ul class="listing__details__comment ul_line" id="freeComment">
+                        <ul class="listing__details__comment ul_line">
+                            <h4>댓글</h4>
                             
-                            
+                            <li>
+                                <div class="listing__details__comment__item">
+                                    <div class="listing__details__comment__item__pic">
+                                        <img src="img/20258.jpg" alt="">
+                                    </div>
+                                    <div class="listing__details__comment__item__text">
+                                        <div class="listing__details__comment__item__rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <span>March 22, 2019</span>
+                                        <h5>임준석</h5>
+                                        <div>
+                                            <p>DM드릴게요</p>
+                                            <img class="zoom" src="" alt="">
+                                            <ul class="ul_line">
+                                                <li><i class="fa fa-hand-o-right"></i> 좋아요</li>
+                                                <li ><button type="button" class="scroll_reply"><i class="fa fa-share-square-o"></i>(3)댓글</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <ul class="ul_line ul_reply3">
+                                        <hr>
+                                        <div class="list_detail_reply">
+                                            <li>
+                                                <div class="listing__details__comment__item__pic">
+                                                    <img src="https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2019/02/11/c3fb2eb9-8326-40db-a29e-56685f8af6f7.JPG" alt="">
+                                                </div>
+                                                <div class="listing__details__comment__item__text">
+                                                    <span>March 22, 2019</span>
+                                                    <h5>윈터1</h5>
+                                                    <p>은우랑 같이왔어요 바람도 적당하고 너무너무 좋았습니다 나중에 또와도 좋을것 같아요!!</p>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        <hr>
+                                        <div class="list_detail_reply">
+                                            <li>
+                                                <div class="listing__details__comment__item__pic">
+                                                    <img src="https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2019/02/11/c3fb2eb9-8326-40db-a29e-56685f8af6f7.JPG" alt="">
+                                                </div>
+                                                <div class="listing__details__comment__item__text">
+                                                    <span>March 22, 2019</span>
+                                                    <h5>윈터2</h5>
+                                                    <p>은우랑 같이왔어요 바람도 적당하고 너무너무 좋았습니다 나중에 또와도 좋을것 같아요!!</p>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        <hr>
+                                        <div class="list_detail_reply">
+                                            <li>
+                                                <div class="listing__details__comment__item__pic">
+                                                    <img src="https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2019/02/11/c3fb2eb9-8326-40db-a29e-56685f8af6f7.JPG" alt="">
+                                                </div>
+                                                <div class="listing__details__comment__item__text">
+                                                    <span>March 22, 2019</span>
+                                                    <h5>윈터3</h5>
+                                                    <p>은우랑 같이왔어요 바람도 적당하고 너무너무 좋았습니다 나중에 또와도 좋을것 같아요!!</p>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        
+                                        <li>
+                                            <div class="listing__details__review">
+                                            <form action="">
+                                                <textarea placeholder="대댓글"></textarea>
+                                                <button type="submit" class="site-btn">대댓글 등록</button>
+                                            </form>
+                                        </div>
+                                        </li>
+                                    </ul>
+                                
+                                </div>
+                             
+                            </li>
                         </ul>
 
-                        <c:if test="${ not empty loginMember }">
+                        <script>
+                            
+                        </script>
                         <div class="listing__details__review">
                             <h4>댓글 작성</h4>
                             <form action="#">
-                                <textarea placeholder="Review" name="" id="freeContent"></textarea>
-                                <button type="button" class="site-btn" onclick="addFreeReply();">댓글등록</button>
+                                <textarea placeholder="Review"></textarea>
+                                <button type="submit" class="site-btn">댓글등록</button>
                             </form>
                         </div>
-						</c:if>
+
                         
                        
                     </div>
@@ -140,7 +199,6 @@
         
     </section>
     <script>
-    
     function postFormSubmit(num){
 		
 		if(num == 1){ // 수정하기 클릭시
@@ -149,87 +207,6 @@
 			$("#postForm").attr("action", "freeBoardDelete.bo").submit();
 		}
 	}
-    
-    
-    $(function(){
-		selectFreeReplyList(); // 화면이 랜더링 되자마자 댓글 조회를 하겠다
-	})
-	
-	
-    function addFreeReply(){
-       
-          // 스페이스바 같은것만 치고 댓글 입력하게 안되게 조건 달기
-          if($("#freeContent").val().trim().length != 0){
-             // 댓글 쓰는 칸의 val가 trim(공백제거 된)후 length 길이가 0이 아닐때 == 유효한 댓글이 맞음
-             
-             $.ajax({
-            	 url:"freeReplyInsert.bo",
-            	 data:{
-            		 boardNo:'${b.boardNo}',
-            		 commContent:$("#freeContent").val(),
-            		 memNo:'${loginMember.memNo}' // 문자열은 이렇게 묶어야함
-            	 },
-            	 success:function(status){
-            		 if(status == "success"){
-            			 selectFreeReplyList();
-            			 $("#freeContent").val("");
-            			 console.log("dddd");
-            		 }
-            	 },
-            	 error:function(){
-            		 console.log("댓글 작성용 ajax 통신 실패!");
-            	 }
-            	 
-             });
-             
-          }else{
-             alert("댓글 작성 후 등록 요청하세용!")
-          }
-       
-       }
-    
-    
-    
-
-    
-   	function selectFreeReplyList(){ // 해당 게시글에 딸린 댓글 조회리스트 조회용 ajax
-   		$.ajax({
-   			url : "freeReplyList.bo",
-   			data : {bno:"${ b.boardNo }" },
-   			success:function(list){
-   				console.log(list);
-   				let value = "<h4>댓글</h4>";
-   				for(let i in list){
-   					value += "<li>"
-   								+ "<div class='listing__details__comment__item'>"
-   									+ "<div class='listing__details__comment__item__pic'>"
-   										+ "<img src=" + list[i].memImgChange + ">"
-   									+ "</div>"
-   									+ "<div class='listing__details__comment__item__text'>"
-   										+ "<span>"+ list[i].createDate + "</span>"
-   										+ "<h5>" + list[i].memId + "</h5>"
-   										+ "<div>"
-   											+ "<p>" + list[i].commContent + "</p>"
-			   							+ "</div>"
-			   						+ "</div>"
-	   							+ "</div>"
-   							+ "</li>";
-   				}
-   				
-   				
-   				$("#freeComment").html(value);
-   				
-   				
-   				
-   			}, 
-   			error:function(){
-   				console.log("ajax 통신 실패!");
-   				
-   			}
-   		});
-   		
-   	}
-   
     
     
     </script>

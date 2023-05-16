@@ -195,6 +195,7 @@
                     <ul>
                         <li><a href="carList.ad">차박게시글</a></li>
                         <li><a href="verity.ad">차박게시글 검수</a></li>
+                        <li><a href="board.ad">커뮤니티게시글</a></li>
                         <li><a href="#">채팅관리</a></li>
                     </ul>
                 </li>

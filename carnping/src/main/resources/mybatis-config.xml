@@ -16,14 +16,12 @@
 		<typeAlias type="com.kh.carnping.member.model.vo.Question" alias="Question"/>
 		<typeAlias type="com.kh.carnping.member.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.carnping.board.model.vo.Board" alias="Board"/>
-		<typeAlias type="com.kh.carnping.board.model.vo.BoardReply" alias="BoardReply"/>
 		<typeAlias type="com.kh.carnping.board.model.vo.Comment" alias="Comment"/>
 		<typeAlias type="com.kh.carnping.car.model.vo.Cinfo" alias="Cinfo"/>
 		<typeAlias type="com.kh.carnping.car.model.vo.CinfoImg" alias="CinfoImg"/>
 		<typeAlias type="com.kh.carnping.car.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.kh.carnping.car.model.vo.Verify" alias="Verify"/>
 		<typeAlias type="com.kh.carnping.car.model.vo.VerifyImg" alias="VerifyImg"/>
-		
 	</typeAliases>
 	<!-- 유의사항 : 미리 등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	

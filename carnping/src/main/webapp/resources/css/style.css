@@ -2903,6 +2903,7 @@ ol {
 	height: 550px;
 	-webkit-box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
 	box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+	margin-bottom: 90px;
 	border-radius: 15px;
 }
 

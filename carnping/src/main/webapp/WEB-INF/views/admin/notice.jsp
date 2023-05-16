@@ -49,27 +49,33 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th>글이름(글번호)</th>
+                                            <th>조회수</th>
                                             <th>작성일</th>
                                             <th class="text-end">옵션</th>
                                         </tr>
                                     </thead>
-                                    <c:forEach var="b" items="${ list }">
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <a href="noticeBoardDetail.bo?bno=${ b.boardNo }">${ b.boardTitle }</a>
+                                                <h2 class="table-avatar">
+                                                    
+                                                    <a href="updateNotice.html">[공지]차박시 기본수칙<span>NTC1
+                                                        </span></a>
+                                                </h2>
                                             </td>
-                                            <td>${ b.createDate }</td>
+                                            <td>
+                                                30
+                                            </td>
+                                            <td>2020-12-13</td>
                                             <td class="text-end">
-                                                <a href="updateNotice.ad?bno=${ b.boardNo }"
+                                                <a href="updateNotice.ad"
                                                     class="btn btn-sm btn-white text-success me-2"><i
                                                         class="far fa-edit me-1"></i> 상세(수정)</a>
-                                                        
                                                 <a href="javascript:void(0);"
                                                     class="btn btn-sm btn-white text-danger me-2"
                                                     data-bs-toggle="modal" data-bs-target="#top-modal"><i
                                                         class="far fa-trash-alt me-1"></i>삭제</a>
-												
+
 
                                                 <div id="top-modal" class="modal fade" tabindex="-1" role="dialog"
                                                     aria-hidden="true">
@@ -83,27 +89,41 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <br>
-                                                                <h5 align="center">정말로 삭제 하시겠습니까?</h5>
+                                                                <h5 align="center">정말로 **를(을) 삭제 하시겠습니까?</h5>
                                                                 <p align="center" style="color:gray">삭제시 복구가 매우 어렵습니다. 신중히 선택바랍니다.</p>
                                                             </div>
                                                             <hr>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-light"
                                                                     data-bs-dismiss="modal">닫기</button>
-                                                                <button type="button" class="btn btn-primary" onclick="postFormSubmit();">삭제</button>
-                                                                <form id="postForm" action="" method="post">
-																	<input type="hidden" name="bno" value="${ b.boardNo }"/>
-												            	</form>
+                                                                <button type="button" class="btn btn-primary">삭제</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <h2 class="table-avatar">
+                                                    
+                                                    <a href="updateNotice.html">[공지]차박시 유의사항<span>NTC2</span></a>
+                                                </h2>
+                                            </td>
+                                            <td>121</td>
+                                            <td>2020-02-11</td>
+                                            <td class="text-end">
+                                                <a href="updateNotice.ad"
+                                                    class="btn btn-sm btn-white text-success me-2"><i
+                                                        class="far fa-edit me-1"></i> 상세(수정)</a>
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-sm btn-white text-danger me-2"><i
+                                                        class="far fa-trash-alt me-1"></i>삭제</a>
+                                            </td>
+                                        </tr>
 
 
                                     </tbody>
-                                    </c:forEach>
                                 </table>
                             </div>
                         </div>
@@ -114,35 +134,6 @@
     </div>
 
 </div>
-
-
-<script>
-	function postFormSubmit(){
-		
-		$("#postForm").attr("action", "noticeBoardDelete.bo").submit();
-		console.log("ddd");
-	}
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 
 </html>

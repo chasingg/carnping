@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h4>에러났다ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</h4>
+<h4>에러났다</h4>
 
 </body>
 </html>

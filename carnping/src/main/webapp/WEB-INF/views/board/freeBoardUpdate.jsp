@@ -6,26 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style>
-    .header_back {
-        width: 100%;
-        height: 105px;
-        background-color: white;
-    }
-</style>
 </head>
-<body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
+<body
+	class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
 
-	<header class="header header--normal">
-
-
-	    <div class="header_back">
-	        <jsp:include page="../common/header.jsp" />
-	    </div>
-
-
-	</header>
+	<jsp:include page="../common/header.jsp" />
 	
 
 
@@ -50,7 +35,7 @@
 				</div>
 
 				
-				<form id="updateForm" method="post" action="freeBoardUpdate.bo" enctype="multipart/form-data" >
+				<form id="updateForm" method="post" action="freeBoardUpdateForm.bo" enctype="multipart/form-data" >
 				<input type="hidden" name="boardNo" value="${ b.boardNo }">
 				<div class="card">
 					<div class="card-body">
@@ -60,20 +45,20 @@
 									<div class="form-group">
 										<label>제목<span class="text-danger"> *</span></label> 
 										
-										<input type="text" id="boardTitle" name="boardTitle" class="form-control" value="${ b.boardTitle }" required style="width: 57%;">
+										<input type="text" id="title" name="boardTitle" class="form-control" value="${ b.boardTitle }" required style="width: 57%;">
 									</div>
 								</div>
 								<div class="col-lg-12 col-md-12">
 									<div class="form-group">
 										<br> <label>작성자<span class="text-danger"> *</span></label> 
 										
-										<input type="text" id="writer" name="memId" class="form-control" value="${ b.memNo }" style="width: 20%; readonly text-align: center;" readonly>
+										<input type="text" id="writer" name="memId" class="form-control" value="${ b.memId }" style="width: 20%; readonly text-align: center;">
 									</div>
 									<br>
 									<div class="filter__select">
 										<label>지역<span class="text-danger"> *</span></label>
 										&nbsp;&nbsp;&nbsp; 
-										<select id="location" name="location">
+										<select id="location">
 											<option value="서울">서울</option>
 											<option value="경기">경기</option>
 											<option value="인천">인천</option>
@@ -85,7 +70,36 @@
 										</select>
 									</div>
 								</div>
-								
+								<!--
+<div class="col-lg-12 col-md-12">
+    <div class="form-group modal-select-box" style="width: 20%;">
+    <label>지역</label>
+    <select class="select">
+    <option value="1">서울</option>
+    <option value="2">경기</option>
+    <option value="2">인천</option>
+    <option value="2">대전</option>
+    <option value="2">대구</option>
+    <option value="2">광주</option>
+    <option value="2">부산</option>
+    <option value="2">제주도</option>
+    </select>
+    </div>
+</div>
+
+
+
+<div class="col-lg-12 col-md-12">
+<div class="form-group">
+<label style="float: left;">파일첨부</label> <br> <br>
+<div class="change-photo-btn" style="width: 20%; float: left;">
+<div>
+<p>Add Image</p></div>
+<input type="file" class="upload">
+</div>
+</div>
+</div> <br><br><br><br><br><br><br><br><br>
+-->
 
 								<br>
 								<br>
@@ -98,16 +112,7 @@
 									<br>
 								<div>
 									<label>대표썸네일<span class="text-danger"> *</span></label> <br><br>
-									<img id="titleImg"  width="250" height="170" src="${ b.boardChangeImg1 }" onclick="chooseFile(1);" name="boardChangeImg1">
-									<input type="hidden" value="${ b.boardOriginImg1 }" name="boardOriginImg1">
-									<input type="hidden" value="${ b.boardOriginImg2 }" name="boardOriginImg2">
-									<input type="hidden" value="${ b.boardOriginImg3 }" name="boardOriginImg3">
-									<input type="hidden" value="${ b.boardOriginImg4 }" name="boardOriginImg4">
-									<input type="hidden" value="${ b.boardChangeImg1 }" name="boardChangeImg1">
-									<input type="hidden" value="${ b.boardChangeImg2 }" name="boardChangeImg2">
-									<input type="hidden" value="${ b.boardChangeImg3 }" name="boardChangeImg3">
-									<input type="hidden" value="${ b.boardChangeImg4 }" name="boardChangeImg4">
-									
+									<img id="titleImg"  width="250" height="170" src="${ b.boardChangeImg1 }" onclick="chooseFile(1);">
 								</div>	
 								
 								<br><br>
@@ -135,8 +140,8 @@
 					</div>
 					<div class=" blog-categories-btn pt-0">
 						<div class="bank-details-btn ">
-							<button type = "button" class="btn btn-primary me-2"
-								style="background-color: rgb(104, 135, 115); color: white; border-color: rgb(104, 135, 115);" onclick="updateContent();">수정</button>
+							<a href="blog.html" class="btn btn-primary me-2"
+								style="background-color: rgb(104, 135, 115); color: white; border-color: rgb(104, 135, 115);" onclick="updateContent();">수정</a>
 						</div>
 					</div>
 				</div>
@@ -150,14 +155,21 @@
 	</div>
 	
 	<script>
+	
+		$(function(){
+			
+			$('#location').val('${ b.location }').trigger('change');
+		})
+			
+		
+	
 		function updateContent(){
-			console.log("살려줘");
 			
 			if($("#boardContent").val().trim().length != 0 && 
 					$("#boardTitle").val().trim().length != 0 &&
 					$("#titleImg").attr("src") != null ){
 				
-				$("#updateForm").submit();
+				$("#enrollForm").submit();
 				
 			}else{
 				alert("하지마");
@@ -172,7 +184,6 @@
 
             if(inputFile.files.length == 1){// 파일이 선택된 경우 => 파일을 읽어들여서 미리보기
                 // 파일을 읽어들일 FileReader 객체 생성
-                console.log("파일이 선택이 됐다.");
                 const reader = new FileReader();
 
                 // 파일을 읽어들이는 메소드 호출

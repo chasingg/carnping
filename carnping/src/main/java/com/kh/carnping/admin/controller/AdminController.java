@@ -98,12 +98,18 @@ public class AdminController {
 	/**
 	 * 커뮤니티게시글 관리로 이동
 	 */
-	@RequestMapping("free-board.ad")
+	@RequestMapping("board.ad")
 	public String board() {
-		return "admin/free-board";
+		return "admin/board";
 	}
 	
-	
+	/**
+	 * 공지사항 관리로 이동
+	 */
+	@RequestMapping("notice.ad")
+	public String notice() {
+		return "admin/notice";
+	}
 	
 	/**
 	 * Qna 관리로 이동
@@ -125,9 +131,21 @@ public class AdminController {
 		return "admin/carDetail";
 	}
 	
-	
+	/**
+	 * 공지사항관리/ 공지사항 수정으로 이동
+	 */
+	@RequestMapping("updateNotice.ad")
+	public String updateNotice() {
+		return "admin/updateNotice";
+	}
 
-	
+	/**
+	 * 공지사항관리/ 공지사항 등록으로 이동
+	 */
+	@RequestMapping("insertNotice.ad")
+	public String insertNotice() {
+		return "admin/insertNotice";
+	}
 	
 	/**
 	 * 차박게시글 등록 검수로 이동

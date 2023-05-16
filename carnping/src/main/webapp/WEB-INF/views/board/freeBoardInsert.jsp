@@ -6,24 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style>
-    .header_back {
-        width: 100%;
-        height: 105px;
-        background-color: white;
-    }
-</style>
 </head>
-<body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
-	
-	<header class="header header--normal">
-	
-		<div class="header_back">
-	        <jsp:include page="../common/header.jsp" />
-	    </div>
+<body
+	class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
 
-	</header>
+	<jsp:include page="../common/header.jsp" />
+
 
 
 	<div class="content container-fluid">
@@ -60,7 +48,7 @@
 								<div class="col-lg-12 col-md-12">
 									<div class="form-group">
 										<br> <label>작성자<span class="text-danger">
-												*</span></label> <input type="text" class="form-control" name="memNo" value="${ loginMember.memNo }"
+												*</span></label> <input type="text" class="form-control" value="admin"
 											style="width: 20%; text-align: center;" readonly="readonly">
 									</div>
 									<br>

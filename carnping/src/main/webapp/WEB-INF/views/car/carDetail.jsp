@@ -642,62 +642,6 @@ to {
 	<!-- Listing Details Section End -->
 
 
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Open modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="inputName">뷰(View)</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter name">
-            <label for="inputName">편의성(Conv)</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter name">
-            <label for="inputName">접근성(Access)</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter name">
-            <label for="inputName">지형(Type)</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter name">
-          </div>
-          <div class="form-group">
-            <label for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-	<jsp:include page="../common/footer.jsp" />
-
-	<!-- Js Plugins -->
-	<script src="https://kit.fontawesome.com/0376f7be50.js"
-		crossorigin="anonymous"></script>
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jquery.nicescroll.min.js"></script>
-	<script src="js/jquery.barfiller.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.slicknav.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/main.js"></script>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51db8bdf50f603f1ca7fd3444ea0dab&libraries=services,clusterer,drawing"></script>
-
 
 	<jsp:include page="../common/footer.jsp" />
 
@@ -794,18 +738,11 @@ function selectReview(){
 		url : 'selectReview.ca',
 		data : { cinfoNo : '${cinfo.cinfoNo}'},
 		success:function(review){
-			
-			//지금 현재 로그인되어있는 userNo
 			let userNo = "<c:out value='${loginMember.memNo}'/>";
 			let values = "";
-			for(let i in comment){
+			for(let i in review){
 				values += "<hr><li><div class='listing__details__comment__item'>"
                 		+  		"<div class='listing__details__comment__item__pic'>"
-                			// 회원 이미지가 없을때
-                		if(review[i].memImg==null){
-                			values +=  "<i class='fa-solid fa-circle-user'style='padding: unset; font-size: 65px;'></i>";
-                		}else{
-                			// 회원이미지가 있을때
                 		if(review[i].memImg==null){
                 			values +=  "<i class='fa-solid fa-circle-user'style='padding: unset; font-size: 65px;'></i>";
                 		}else{
@@ -813,26 +750,6 @@ function selectReview(){
                 		}
                 values +=		"</div>"
                 		+		"<div class='listing__details__comment__item__text'>"
-                							// 날짜
-                    	+ 			 "<span>" + review[i].createDate +"</span>"
-                    						// 회원이름
-                    	+ 			 "<h5>" + review[i].memName +"</h5>"
-                    	+ 			 "<div class='row'>"
-                    	+ 			 	"<div class='col-md-12'>";
-                    		// 댓글 내용
-	                    	values +="<p>" + review[i].reviewContent + "</p>"
-               						+ "</div>
-			                    	+	 "</div><br>"
-			                    	+	"<ul class='ul_line'>"
-                    	<c:choose>
-			                    	
-			                //if(userNo==review[i].memNo){
-                    		//values+= "<li><button class='btn' onclick='updateReview(\""+review[i] +"\");'>댓글 수정</button></li>"               			
-                    		//		+"<li><button class='btn'>댓글 삭제</button></li>";                			
-			                //}
-                    	values+=  "<input type='hidden' value='"+review[i].reviewNo+"'></li>"
-                        values += "<br><br></ul></div></div></li>";
-				}
                 		+ "<div class='listing__details__comment__item__rating'>";
                 		
                 		
@@ -900,10 +817,6 @@ function selectReview(){
 		}
 	})
 }
-
-
-	
-
 
 // 리뷰 댓글
 function reviewComment(reviewNo){

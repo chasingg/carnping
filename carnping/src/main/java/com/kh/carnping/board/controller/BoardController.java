@@ -13,14 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.kh.carnping.board.model.service.BoardServiceImpl;
 import com.kh.carnping.board.model.vo.Board;
-import com.kh.carnping.board.model.vo.BoardReply;
-import com.kh.carnping.member.model.vo.Member;
 
 
 
@@ -62,28 +58,6 @@ public class BoardController {
         
   }
 	
-	
-	/**
-     *  최신순 버튼
-     */
-	@RequestMapping("lastest.bo")
-	public String selectLastest(Model model) {
-		
-		ArrayList<Board> list = bService.selectLastest();
-		
-		if(list != null) {
-			model.addAttribute("list", list);
-			return "board/freeBoard";
-		}else {
-			model.addAttribute("errorMsg", "게시글 조회 실패!");
-	    	return "common/errorPage";
-		}
-	}
-	
-	
-	/**
-     *  무료나눔 게시판 조회
-     */
 	@RequestMapping("freeBoard.bo")
 	public String selectFreeBoardList(Model model) {
 		
@@ -100,11 +74,20 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping("lastest.bo")
+	public String selectLastest(Model model) {
+		
+		ArrayList<Board> list = bService.selectLastest();
+		
+		if(list != null) {
+			model.addAttribute("list", list);
+			return "board/freeBoard";
+		}else {
+			model.addAttribute("errorMsg", "게시글 조회 실패!");
+	    	return "common/errorPage";
+		}
+	}
 	
-	
-	/**
-     *  무료나눔 게시판 상세조회
-     */
 	@RequestMapping("freeBoardDetail.bo")
 	public String selectFreeBoardDetail(String bno, Model model) {
 		
@@ -115,31 +98,15 @@ public class BoardController {
 		return "board/freeBoardDetail";
 	}
 	
-	
-	/**
-     *  무료나눔 게시판 등록화면 가기
-     */
-	@RequestMapping("enrollFreeBoardForm.bo")
-	public String enrollFreeBoardForm() {
+	@RequestMapping("enrollForm.bo")
+	public String enrollForm() {
 		return "board/freeBoardInsert";
 	}
 	
-	
-	/**
-     *  무료나눔 게시판 등록 및 이미지 등록
-     */
 	@RequestMapping("freeBoardInsert.bo")
 	public String freeBoardInsert(Board b, MultipartFile upfile[], HttpSession session, Model model) {
-		
-		for(int i=0; i<upfile.length; i++) {
-			System.out.println(upfile[i]);
-		}
-		
 		// System.out.println(upfile);
 		// System.out.println(upfile.length);
-		//	Member m = (Member)session.getAttribute("loginMember"); 
-		//		
-		//	b.setMemNo(m.getMemId());
 		
 		for(int i=0; i<upfile.length; i++) {
 			if(!upfile[i].getOriginalFilename().equals("")) { // 첨파있다.
@@ -175,7 +142,7 @@ public class BoardController {
 		int result1 = bService.insertFreeBoard(b);
 		
 		if(result1 > 0) {
-			int result2 = bService.insertFreeBoardImage(b);
+			int result2 = bService.insertBoardImage(b);
 			
 			if(result1 > 0 && result2 > 0) {
 				session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
@@ -189,14 +156,10 @@ public class BoardController {
 		return "board/freeBoardInsert";
 	}
 	
-	
-	/**
-     *  무료나눔 게시판 삭제
-     */
 	@RequestMapping("freeBoardDelete.bo")
-	public String deleteFreeBoard(String bno, String filePath, HttpSession session, Model model) {
+	public String deleteBoard(String bno, String filePath, HttpSession session, Model model) {
 		   
-	   int result = bService.deleteFreeBoard(bno);
+	   int result = bService.deleteFreeboard(bno);
 	   
 	   System.out.println(result);
 	   
@@ -221,9 +184,6 @@ public class BoardController {
    }
 	
 	
-	/**
-     *  무료나눔 게시판 수정화면 가기
-     */
 	@RequestMapping("freeBoardUpdateForm.bo")
 	public String freeBoardUpdateForm(String bno, Model model) {
 		
@@ -231,378 +191,30 @@ public class BoardController {
 		return "board/freeBoardUpdate";
 	}
 	
-	
-	/**
-     *  무료나눔 게시판 수정 및 이미지 수정
-     */
-	@RequestMapping("freeBoardUpdate.bo")
 	public String freeBoardUpdate(Board b, MultipartFile reupfile[], HttpSession session, Model model) {
-
-		for(int i=0; i<reupfile.length; i++) {
 		
-			String bno = b.getBoardNo();
-			Board bt = bService.selectFreeBoardDetail(bno);
-			
-		
-			
-			b.setBoardOriginImg1(bt.getBoardOriginImg1());
-			b.setBoardOriginImg2(bt.getBoardOriginImg2());
-			b.setBoardOriginImg3(bt.getBoardOriginImg3());
-			b.setBoardOriginImg4(bt.getBoardOriginImg4());
-			
-			if(!reupfile[i].getOriginalFilename().equals("")) { // 첨파있다. 사진한장이라도 수정한경우에는 여기
-				String changeName = saveFile(reupfile[i], session);
-				// System.out.println("제발여기를보세요!!!!!!!");
-				// System.out.println(reupfile[0].getOriginalFilename());
-				switch(i) {
-				case 0 : 
-					//if(reupfile[0].getOriginalFilename())
-					b.setBoardOriginImg1(reupfile[0].getOriginalFilename());
-					b.setBoardChangeImg1("resources/img/board/" + changeName);
-					break;
-				case 1 :
-					b.setBoardOriginImg2(reupfile[1].getOriginalFilename());
-					b.setBoardChangeImg2("resources/img/board/" + changeName);
-					break;
-				case 2 : 
-					b.setBoardOriginImg3(reupfile[2].getOriginalFilename());
-					b.setBoardChangeImg3("resources/img/board/" + changeName);
-					break;
-				case 3 : 
-					b.setBoardOriginImg4(reupfile[3].getOriginalFilename());
-					b.setBoardChangeImg4("resources/img/board/" + changeName);
-					break;
-				}
-				
-				System.out.println("==첨바바뀌고 난 뒤 b ====");
-				System.out.println(b);
-				
-				
-			}
-		}
-		
-		// System.out.println(b);
-		
- 		
-		
-		int result1 = bService.updateFreeBoard(b);
-		
-		if(result1 > 0) {
-			int result2 = bService.updateFreeBoardImage(b);
-			
-			if(result1 > 0 && result2 > 0) {
-				session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
-		    	return "redirect:freeBoardDetail.bo?bno=" + b.getBoardNo();
-			}else {
-				model.addAttribute("errorMsg", "게시글 수정 실패!");
-		    	return "common/errorPage";
-			}
-		}
-		
-		return "board/freeBoardDetail";
 		
 	}
 	
-
 	
 	
-	
-	
-	
-	
-	/**
-     *  소모임 게시판 조회
-     */
 	@RequestMapping("partyBoard.bo")
-	public String selectPartyBoardList(Model model) {
-
-		ArrayList<Board> list = bService.selectPartyBoardList();
-		System.out.println(list);
-		
-		if(list != null) {
-			model.addAttribute("list", list);
-			return "board/partyBoard";
-		}else {
-			model.addAttribute("errorMsg", "게시글 조회 실패!");
-			return "common/errorPage";
-		}
-		
+	public String partyBoard() {
+		return "board/partyBoard";
 	}
 	
-	
-	
-	/**
-     *  소모임 게시판 상세조회
-     */
 	@RequestMapping("partyBoardDetail.bo")
-	public String selectPartyBoardDetail(String bno, Model model) {
-		
-		Board b = bService.selectPartyBoardDetail(bno);
-		model.addAttribute("b", b);
-		
+	public String partyBoardDetail() {
 		return "board/partyBoardDetail";
 	}
 	
-	
-	
-	/**
-     *  소모임 게시판 등록화면 가기
-     */
-	@RequestMapping("enrollPartyBoardForm.bo")
-	public String enrollPartyBoardForm() {
-		
+	@RequestMapping("partyBoardInsert.bo")
+	public String partyBoardInsert() {
 		return "board/partyBoardInsert";
 	}
 	
-	
-	/**
-     *  소모임 게시판 등록
-     */
-	@RequestMapping("partyBoardInsert.bo")
-	public String partyBoardInsert(Board b, HttpSession session, Model model) {
-		
-		int result = bService.partyBoardInsert(b);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-	    	return "redirect:partyBoard.bo";
-		}else {
-			model.addAttribute("errorMsg", "게시글 등록 실패!");
-	    	return "common/errorPage";
-		}
-	}
-	
-	
-	/**
-     *  소모임 게시판 삭제
-     */
-	@RequestMapping("partyBoardDelete.bo")
-	public String deletePartyBoard(String bno, HttpSession session, Model model) {
-		   
-	   int result = bService.deletePartyBoard(bno);
-	   
-	   if(result > 0) {
-		   session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-		   return "redirect:partyBoard.bo";
-	   }else {
-		   model.addAttribute("errorMsg", "게시글 삭제 실패!");
-		   return "common/errorPage";
-	   }
-	   
-   }
-	
-	
-	/**
-     *  소모임 게시판 수정화면 가기
-     */
-	@RequestMapping("partyBoardUpdateForm.bo")
-	public String partyBoardUpdateForm(String bno, Model model) {
-		
-		model.addAttribute("b", bService.selectPartyBoardDetail(bno));
+	@RequestMapping("partyBoardUpdate.bo")
+	public String partyBoardUpdate() {
 		return "board/partyBoardUpdate";
 	}
-	
-	
-	/**
-     *  소모임 게시판 수정
-     */
-	@RequestMapping("partyBoardUpdate.bo")
-	public String updatePartyBoard(Board b, HttpSession session, Model model) {
-
- 		
-		
-		int result = bService.updatePartyBoard(b);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
-			return "redirect:partyBoardDetail.bo?bno=" + b.getBoardNo();
-		}else {
-			model.addAttribute("errorMsg", "게시글 수정 실패!");
-	    	return "common/errorPage";
-		}
-		
-	}
-	
-	
-	
-	
-	
-	
-	/**
-     *  무료나눔 댓글 리스트 조회
-     */
-	@ResponseBody
-	@RequestMapping(value="freeReplyList.bo", produces = "application/json; charset=UTF-8")
-	public String ajaxSelectFreeReplyList(String bno) {
-		   
-		ArrayList<BoardReply> list = bService.selectFreeReplyList(bno);
-		return new Gson().toJson(list);
-		   
-	}
-	
-	
-	/**
-     *  무료나눔 댓글 등록
-     */
-	@ResponseBody
-	@RequestMapping("freeReplyInsert.bo")
-	public String ajaxFreeReplyInsert(BoardReply r) {
-		
-		int result = bService.freeReplyInsert(r);
-		return result > 0 ? "success" : "fail";
-	}
-	
-	
-	/**
-     *  소모임 댓글 리스트 조회
-     */
-	@ResponseBody
-	@RequestMapping(value="partyReplyList.bo", produces = "application/json; charset=UTF-8")
-	public String ajaxSelectPartyReplyList(String bno) {
-		   
-		ArrayList<BoardReply> list = bService.selectPartyReplyList(bno);
-		return new Gson().toJson(list);
-		   
-	}
-	
-	
-	/**
-     *  소모임 댓글 등록
-     */
-	@ResponseBody
-	@RequestMapping("partyReplyInsert.bo")
-	public String ajaxPartyReplyInsert(BoardReply r) {
-		
-		int result = bService.partyReplyInsert(r);
-		return result > 0 ? "success" : "fail";
-	}
-	
-	
-	
-	
-	
-	
-	
-	/**
-     *  공지사항 등록화면 가기
-     */
-	@RequestMapping("insertNotice.ad")
-	public String enrollNoticeBoardForm() {
-		return "admin/insertNotice";
-	}
-	
-	
-	
-	/**
-     *  공지사항 등록
-     */
-	@RequestMapping("noticeBoardInsert.bo")
-	public String noticeBoardInsert(Board b, HttpSession session, Model model) {
-		
-		int result = bService.noticeBoardInsert(b);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-	    	return "redirect:notice.ad";
-		}else {
-			model.addAttribute("errorMsg", "게시글 등록 실패!");
-	    	return "common/errorPage";
-		}
-	}
-	
-	
-	/**
-     *  공지사항 조회
-     */
-	@RequestMapping("notice.ad")
-	public String selectNoticeBoardList(Model model) {
-		
-		ArrayList<Board> list = bService.selectNoticeBoardList();
-		
-		
-		if(list != null) {
-			model.addAttribute("list", list);
-			return "admin/notice";
-		}else {
-			model.addAttribute("errorMsg", "게시글 조회 실패!");
-	    	return "common/errorPage";
-		}
-		
-	}
-	
-	
-	/**
-     *  공지사항 상세조회
-     */
-	@RequestMapping("noticeBoardDetail.bo")
-	public String selectNoticeBoardDetail(String bno, Model model) {
-		
-		Board b = bService.selectNoticeBoardDetail(bno);
-		
-		model.addAttribute("b", b);
-		
-		return "board/noticeBoardDetail";
-	}
-	
-	
-	
-	/**
-     *  공지사항 수정화면 가기
-     */
-	@RequestMapping("updateNotice.ad")
-	public String noticeBoardUpdateForm(String bno, Model model) {
-		
-		model.addAttribute("b", bService.selectNoticeBoardDetail(bno));
-		return "admin/updateNotice";
-	}
-	
-	
-	
-	/**
-     *  공지사항 수정
-     */
-	@RequestMapping("noticeBoardUpdate.bo")
-	public String updateNoticeBoard(Board b, HttpSession session, Model model) {
-		System.out.println("이거타냐?");
-		System.out.println(b);
-		
-		int result = bService.updateNoticeBoard(b);
-		System.out.println(result);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
-			return "redirect:noticeBoardDetail.bo?bno=" + b.getBoardNo();
-		}else {
-			model.addAttribute("errorMsg", "게시글 수정 실패!");
-	    	return "common/errorPage";
-		}
-		
-	}
-	
-	
-	
-	/**
-     *  공지사항 삭제
-     */
-	@RequestMapping("noticeBoardDelete.bo")
-	public String deleteNoticeBoard(String bno, HttpSession session, Model model) {
-		
-		System.out.println("이거타나??");
-	   int result = bService.deleteNoticeBoard(bno);
-	   
-	   if(result > 0) {
-		   session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-		   return "redirect:notice.ad";
-	   }else {
-		   model.addAttribute("errorMsg", "게시글 삭제 실패!");
-		   return "common/errorPage";
-	   }
-	   
-   }
-	
-	
-	
-	
-	
-	
 }
