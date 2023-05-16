@@ -465,7 +465,7 @@
 				)
 	
 	</insert>
-	<!-- <insert id="deleteImgRequest">
+	<insert id="deleteImgRequest">
 	 	INSERT 
 	 	  INTO
 	 			VERIFY_IMG
@@ -496,7 +496,7 @@
 	 			, #{cinfo.cinfoImg9}
 	 			, #{cinfo.cinfoImg10}
 	 			)
-	</insert> -->
+	</insert>
 	
 	<!-- 요청 중복 체크 --> 
 	<select id="checkRequest" resultType="_int">
@@ -506,81 +506,8 @@
 		 WHERE  MEM_NO = #{loginMember}
 	</select>
 	
-	<insert id="updateCarRequest">
-		INSERT
-		  INTO 
-		  		VERIFY
-		  		(
-		  		VERIFY_NO
-				,VERIFY_NAME
-				,VERIFY_CONTENT
-				,VERIFY_NOTICE
-				,VERIFY_LTTD
-				,VERIFY_HRDNS
-				,VERIFY_STATUS
-				,VERIFY_ADDRESS
-				,VERIFY_FACILITIES
-				,VERIFY_DAYS
-				,VERIFY_TAG
-				,VERIFY_MODIFIED
-				,VERIFY_RGSTR_DATE
-				,VERIFY_REASON
-				,MEM_NO
-				,CINFO_NO
-		  		)
-		VALUES	
-				(
-				  'VER'||SEQ_VER_NO.NEXTVAL
-				, #{verifyName}
-				, #{verifyContent}
-				, #{verifyNotice}
-				, #{verifyLttd}
-				, #{verifyHrdns}
-				, 'U'
-				, #{verifyAddress}
-				, #{verifyFacilities}
-				, #{verifyDays}
-				, #{verifyTag}
-				, SYSDATE
-				, SYSDATE
-				, #{verifyReason}
-				, #{memNo}
-				, #{cinfoNo}
-				)
-	</insert>
 	
-	<insert id="updateCarImgRequest">
-	INSERT 
-	 	  INTO
-	 			VERIFY_IMG
-	 			(
-	 			VERIFY_NO
-				,VERIFY_IMG1
-				,VERIFY_IMG2
-				,VERIFY_IMG3
-				,VERIFY_IMG4
-				,VERIFY_IMG5
-				,VERIFY_IMG6
-				,VERIFY_IMG7
-				,VERIFY_IMG8
-				,VERIFY_IMG9
-				,VERIFY_IMG10
-	 			)
-	 	VALUES
-	 			(
-	 			'VER'||(select Last_number-1 VER from user_sequences where sequence_name='SEQ_VER_NO')
-	 			, #{verifyImg1}
-	 			, #{verifyImg2}
-	 			, #{verifyImg3}
-	 			, #{verifyImg4}
-	 			, #{verifyImg5}
-	 			, #{verifyImg6}
-	 			, #{verifyImg7}
-	 			, #{verifyImg8}
-	 			, #{verifyImg9}
-	 			, #{verifyImg10}
-	 			)
-	</insert>
+	
 	
 	
 	

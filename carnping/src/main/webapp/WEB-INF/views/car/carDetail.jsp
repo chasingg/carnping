@@ -620,7 +620,7 @@ to {
 						<div class="listing__sidebar__working__hours">
 							<div align="center">
 							<button class="btn" onclick="deleteRequest();">삭제요청</button>
-							<button class="primary-btn btn" onclick="updateRequest();">수정요청</button>
+							<button class="primary-btn btn" >수정요청</button>
 							</div>
 						</div>
 						</c:if>
@@ -1015,9 +1015,9 @@ $("#insertReview").on("submit", function(){
 	}
 	
 })
-/* function updateRequest(){
+function updateSDRequest(){
 	let result = prompt("삭제 사유를 말씀해주세요.","");
-	let cinfo[] = [{
+	let cinfo[] = {
 			cinfoNo:"${cinfo.cinfoNo}",
 			cinfoName:"${cinfo.cinfoName}",
 			cinfoContent:"${cinfo.cinfoContent}",
@@ -1040,7 +1040,7 @@ $("#insertReview").on("submit", function(){
 			cinfoImg9:"${cinfo.cinfoImg9}",
 			cinfoImg10:"${cinfo.cinfoImg10}"
 		
-	}]
+	}
 	$.ajax({
 		url : "deleteRequest.ca", 
 		data : {
@@ -1052,11 +1052,6 @@ $("#insertReview").on("submit", function(){
 		}
 	})
 	
-} */
-
-function updateRequest(){
-	cinfoNo = "<c:out value='${cinfo.cinfoNo}'/>"
-	location.href = "updateRequest.ca?cinfoNo="+cinfoNo;
 }
 </script>
 

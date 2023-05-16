@@ -112,16 +112,6 @@ public class CarServiceImpl implements CarService{
 	public int deleteRequest(HashMap<String, Object> map) {
 		return cDao.deleteRequest(sqlSession, map);
 	}
-
-	@Override
-	public int updateCarRequest(Verify verify) {
-		return cDao.updateCarRequest(sqlSession, verify);
-	}
-	
-	@Override
-	public int updateCarImgRequest(VerifyImg verifyImg) {
-		return cDao.updateCarImgRequest(sqlSession, verifyImg);
-	}
 	
 	
 }

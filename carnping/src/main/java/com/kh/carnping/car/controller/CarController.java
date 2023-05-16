@@ -1,6 +1,5 @@
 package com.kh.carnping.car.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -180,48 +179,40 @@ public class CarController {
 		verify.setVerifyDays(verifyDay);
 		verify.setVerifyFacilities(verifyFacilitie);
 		verify.setVerifyTag(verifyTags);
+		System.out.println(verify);
+		System.out.println(upfile.length);
 		for(int i = 0; i < upfile.length; i++) {
 			if(!upfile[i].getOriginalFilename().equals("")) {
 				String changeName = new SaveFile().carFile(upfile[i], session);
 				switch (i) {
 			      case 0:
-			    	verifyImg.setVerifyOrImg1(upfile[i].getOriginalFilename());
 			        verifyImg.setVerifyImg1("resources/img/carImg/" + changeName);
 			        break;
 			      case 1:
-			    	  verifyImg.setVerifyOrImg2(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg2("resources/img/carImg/" + changeName);
+			        verifyImg.setVerifyImg2("resources/img/carImg/" + changeName);
 			        break;
 			      case 2:
-			    	  verifyImg.setVerifyOrImg3(upfile[i].getOriginalFilename());
 			        verifyImg.setVerifyImg3("resources/img/carImg/" + changeName);
 			        break;
 			      case 3:
-			    	  verifyImg.setVerifyOrImg4(upfile[i].getOriginalFilename());
 			    	  verifyImg.setVerifyImg4("resources/img/carImg/" + changeName);
 			    	  break;
 			      case 4:
-			    	  verifyImg.setVerifyOrImg5(upfile[i].getOriginalFilename());
 			    	  verifyImg.setVerifyImg5("resources/img/carImg/" + changeName);
 			    	  break;
 			      case 5:
-			    	  verifyImg.setVerifyOrImg6(upfile[i].getOriginalFilename());
 			    	  verifyImg.setVerifyImg6("resources/img/carImg/" + changeName);
 			    	  break;
 			      case 6:
-			    	  verifyImg.setVerifyOrImg7(upfile[i].getOriginalFilename());
 			    	  verifyImg.setVerifyImg7("resources/img/carImg/" + changeName);
 			    	  break;
 			      case 7:
-			    	  verifyImg.setVerifyOrImg8(upfile[i].getOriginalFilename());
 			    	  verifyImg.setVerifyImg8("resources/img/carImg/" + changeName);
 			    	  break;
 			      case 8:
-			    	  verifyImg.setVerifyOrImg9(upfile[i].getOriginalFilename());
 			    	  verifyImg.setVerifyImg9("resources/img/carImg/" + changeName);
 			    	  break;
 			      case 9:
-			    	  verifyImg.setVerifyOrImg10(upfile[i].getOriginalFilename());
 			    	  verifyImg.setVerifyImg10("resources/img/carImg/" + changeName);
 			    	  break;
 			      default:
@@ -260,92 +251,5 @@ public class CarController {
 				return  new Gson().toJson("삭제요청도중 오류발생");
 			}
 		}
-	}
-	
-	@RequestMapping("updateRequest.ca")
-	public String updateRequest(String cinfoNo, Model model) {
-		System.out.println("x탄다");
-		Cinfo cinfo = cService.selectDetail(cinfoNo);
-		model.addAttribute("cinfo",cinfo);
-		return "car/updateCar";
-	}
-	
-	//차박 수정 요청
-	@RequestMapping("updateCar.ca")
-	public String updateCar(Verify verify, MultipartFile[] upfile, Model model,HttpSession session) {
-		VerifyImg verifyImg = new VerifyImg();
-		
-		String verifyFacilitie = String.join(",", verify.getVerifyFacilitie());
-		String verifyDay = String.join(",", verify.getVerifyDay());
-		String verifyTags = String.join(",", verify.getVerifyTags());
-
-		verify.setVerifyDays(verifyDay);
-		verify.setVerifyFacilities(verifyFacilitie);
-		verify.setVerifyTag(verifyTags);
-		System.out.println(upfile);
-		for(int i = 0; i < upfile.length; i++) {
-			if(!upfile[i].getOriginalFilename().equals("")) {
-				String changeName = new SaveFile().carFile(upfile[i], session);
-				switch (i) {
-			      case 0:
-			    	if(verifyImg.getVerifyOrImg1() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg1())).delete();}
-			    	verifyImg.setVerifyOrImg1(upfile[i].getOriginalFilename());
-			        verifyImg.setVerifyImg1("resources/img/carImg/" + changeName);
-			        break;
-			      case 1:
-			    	  if(verifyImg.getVerifyOrImg2() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg2())).delete();}
-			    	  verifyImg.setVerifyOrImg2(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg2("resources/img/carImg/" + changeName);
-			        break;
-			      case 2:
-			    	  if(verifyImg.getVerifyOrImg3() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg3())).delete();}
-			    	  verifyImg.setVerifyOrImg3(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg3("resources/img/carImg/" + changeName);
-			        break;
-			      case 3:
-			    	  if(verifyImg.getVerifyOrImg4() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg4())).delete();}
-			    	  verifyImg.setVerifyOrImg4(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg4("resources/img/carImg/" + changeName);
-			    	  break;
-			      case 4:
-			    	  if(verifyImg.getVerifyOrImg5() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg5())).delete();}
-			    	  verifyImg.setVerifyOrImg5(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg5("resources/img/carImg/" + changeName);
-			    	  break;
-			      case 5:
-			    	  if(verifyImg.getVerifyOrImg6() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg6())).delete();}
-			    	  verifyImg.setVerifyOrImg6(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg6("resources/img/carImg/" + changeName);
-			    	  break;
-			      case 6:
-			    	  if(verifyImg.getVerifyOrImg7() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg7())).delete();}
-			    	  verifyImg.setVerifyOrImg7(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg7("resources/img/carImg/" + changeName);
-			    	  break;
-			      case 7:
-			    	  if(verifyImg.getVerifyOrImg8() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg8())).delete();}
-			    	  verifyImg.setVerifyOrImg8(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg8("resources/img/carImg/" + changeName);
-			    	  break;
-			      case 8:
-			    	  if(verifyImg.getVerifyOrImg9() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg9())).delete();}
-			    	  verifyImg.setVerifyOrImg9(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg9("resources/img/carImg/" + changeName);
-			    	  break;
-			      case 9:
-			    	  if(verifyImg.getVerifyOrImg10() != null) {new File(session.getServletContext().getRealPath(verifyImg.getVerifyImg10())).delete();}
-			    	  verifyImg.setVerifyOrImg10(upfile[i].getOriginalFilename());
-			    	  verifyImg.setVerifyImg10("resources/img/carImg/" + changeName);
-			    	  break;
-			      default:
-			        break;
-			    }
-			}
-		}
-		System.out.println(verify);
-		System.out.println(verifyImg);
-		int result1 = cService.updateCarRequest(verify);
-		int result2 = cService.updateCarImgRequest(verifyImg);
-		return "main";
 	}
 }
